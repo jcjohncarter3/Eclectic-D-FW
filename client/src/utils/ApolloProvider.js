@@ -1,11 +1,14 @@
+
 import React from 'react';
-import { ApolloProvider as Provider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider as Provider } from '@apollo/client';
 
 const client = new ApolloClient({
-  link: createHttpLink({ uri: '/graphql', credentials: 'same-origin' }),
+  uri: 'http://localhost:4000/graphql', // URL of your backend GraphQL API
   cache: new InMemoryCache(),
 });
 
-const ApolloProvider = ({ children }) => <Provider client={client}>{children}</Provider>;
+const ApolloProvider = ({ children }) => {
+  return <Provider client={client}>{children}</Provider>;
+};
 
 export default ApolloProvider;
