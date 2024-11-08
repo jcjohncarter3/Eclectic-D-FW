@@ -27,3 +27,41 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
+
+
+
+
+
+// const Venue = require('../models/Venue');
+// const LiveMusic = require('../models/LiveMusic');
+// const Review = require('../models/Review');
+
+// const resolvers = {
+//   Query: {
+//     venues: async () => {
+//       return await Venue.find();
+//     },
+//     liveMusic: async () => {
+//       return await LiveMusic.find();
+//     },
+//   },
+
+//   Mutation: {
+//     addReview: async (_, { venueId, reviewText }) => {
+//       const newReview = new Review({
+//         text: reviewText,
+//         user: 'Anonymous',
+//         venueId,
+//       });
+
+//       await newReview.save();
+
+//       const venue = await Venue.findById(venueId);
+//       venue.reviews.push(newReview);
+//       await venue.save();
+
+//       return newReview;
+//     },
+//   },
+
