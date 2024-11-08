@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_URI, {
 // Basic GraphQL setup
 const typeDefs = `
   type Query {
-    hello: boolean
+    hello: String
   }
 `;
 
