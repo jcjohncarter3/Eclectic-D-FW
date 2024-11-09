@@ -12,6 +12,10 @@ function ReviewPage({ match }) {
 
   const venue = data.venues.find((venue) => venue._id === venueId);
 
+  if (!venue) {
+    return <p>Venue not found.</p>;
+  }
+
   return (
     <div>
       <h1>Reviews for {venue.name}</h1>
