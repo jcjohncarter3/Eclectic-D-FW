@@ -3,8 +3,11 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    users: async () => User.find(),
+    users: async (_, { id }) => {
+      return User.findById(id);
+    },
     venues: async () => Venue.find(),
+    liveMusic: async () => [],
   },
   Mutation: {
     addUser: async (_, { username, email, password }) => {

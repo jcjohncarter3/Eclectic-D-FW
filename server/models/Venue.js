@@ -16,4 +16,6 @@ const venueSchema = new Schema({
   reviews: [reviewSchema],
 });
 
-module.exports = venueSchema;
+const Venue = model("Venue", venueSchema);
+
+module.exports = Venue;
