@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
+// const { expressMiddleware } = require("@apollo/server/express4");
 const path = require("path");
 const db = require("./config/db");
 const typeDefs = require("./schemas/typeDefs");
@@ -33,6 +34,7 @@ const startApolloServer = async () => {
     });
   }
 
+  // app.use("/graphql", expressMiddleWare);
   // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
   // app.use("/graphql", expressMiddleware(server));
   server.applyMiddleware({
@@ -41,7 +43,7 @@ const startApolloServer = async () => {
     // By default, apollo-server hosts its GraphQL endpoint at the
     // server root. However, *other* Apollo Server packages host it at
     // /graphql. Optionally provide this to match apollo-server.
-    path: "/",
+    path: "/graphql",
   });
   db.once("open", () => {
     app.listen(PORT, () => {
