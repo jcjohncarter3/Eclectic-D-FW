@@ -1,5 +1,5 @@
-const { User, Venue } = require('../models');
-const { signToken } = require('../utils/auth');
+const { User, Venue } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -14,9 +14,9 @@ const resolvers = {
     },
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
-      if (!user) throw new Error('User not found');
+      if (!user) throw new Error("User not found");
       const isValid = await user.isCorrectPassword(password);
-      if (!isValid) throw new Error('Invalid credentials');
+      if (!isValid) throw new Error("Invalid credentials");
       const token = signToken(user);
       return { token, user };
     },
@@ -27,11 +27,6 @@ const resolvers = {
 };
 
 module.exports = resolvers;
-
-
-
-
-
 
 // const Venue = require('../models/Venue');
 // const LiveMusic = require('../models/LiveMusic');
@@ -64,4 +59,3 @@ module.exports = resolvers;
 //       return newReview;
 //     },
 //   },
-
