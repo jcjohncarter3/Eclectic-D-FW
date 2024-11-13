@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_VENUES } from '../graphql/queries';
+import { QUERY_ALL_VENUES } from '../graphql/queries';
 
 function ExplorePage() {
-  const { loading, error, data } = useQuery(GET_VENUES);
+  const { loading, error, data } = useQuery(QUERY_ALL_VENUES);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;

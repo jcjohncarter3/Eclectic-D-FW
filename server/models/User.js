@@ -2,8 +2,8 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
 // import schema from Venue.js
-const venueSchema = require("./Venue");
-const reviewSchema = require("./Review");
+const { venueSchema } = require("./Venue");
+const { reviewSchema } = require("./Review");
 
 const userSchema = new Schema(
   {
@@ -23,8 +23,21 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedVenues to be an array of data that adheres to the venueSchema
-    savedVenues: [venueSchema],
-    reviews: [reviewSchema],
+    // savedVenues: [venueSchema],
+    savedVenues: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "venueSchema",
+        required: true,
+      },
+    ],
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "reviewSchema",
+        required: true,
+      },
+    ],
   },
   // set this to use virtual below
   {

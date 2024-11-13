@@ -5,7 +5,7 @@ import { GET_VENUES } from '../graphql/queries';
 import { ADD_REVIEW } from '../graphql/queries';
 
 function MusicVenuePage({ match }) {
-  const { venueId } = match.params;
+  // const { venueId } = match.params;
   const { loading, error, data } = useQuery(GET_VENUES);
   const [addReview] = useMutation(ADD_REVIEW);
   const [reviewText, setReviewText] = useState('');
