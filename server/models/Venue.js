@@ -13,6 +13,7 @@ const venueSchema = new Schema({
   description: {
     type: String,
   },
+  liveMusic: { type: Boolean, default: false },
   //   reviews: [reviewSchema],
 });
 

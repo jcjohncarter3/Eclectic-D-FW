@@ -10,11 +10,13 @@ const resolvers = {
     liveMusic: async () => [],
   },
   Mutation: {
-    //   addUser: async (_, { username, email, password }) => {
-    //     const user = await User.create({ username, email, password });
-    //     const token = signToken(user);
-    //     return { token, user };
-    //   },
+    // The mutation to sign on a user for a new account
+    addUser: async (_, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      // const token = signToken(user);
+      // return { token, user };
+      return user;
+    },
     //   login: async (_, { email, password }) => {
     //     const user = await User.findOne({ email });
     //     if (!user) throw new Error("User not found");
