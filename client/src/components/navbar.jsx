@@ -21,8 +21,8 @@ function NavBar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/reviews" activeClassName="active">
-            Reviews
+          <NavLink to="/auth" activeClassName="active">
+            Login/Sign-Up
           </NavLink>
         </li>
       </ul>
