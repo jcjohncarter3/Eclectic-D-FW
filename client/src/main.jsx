@@ -3,8 +3,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
-import Venues from './pages/Venues'
-// import SavedBooks from './pages/SavedBooks'
+import ExplorePage from './pages/ExplorePage';
+// import LiveMusicPage from './pages/LiveMusicPage';
+// import MusicVenuePage from './pages/MusicVenuePage';
+// import ReviewPage from './pages/ReviewPage';
+// import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +17,17 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Venues />
-      }
+        element: <ExplorePage />
+      }/*, {
+        path: '/live-music',
+        element: <LiveMusicPage />
+      }, {
+        path: '/music-venue',
+        element: <MusicVenuePage />
+      }, {
+        path: '/reviews',
+        element: <ReviewPage />
+      }*/
     ]
   }
 ])
