@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import ExplorePage from './pages/ExplorePage';
 // import LiveMusicPage from './pages/LiveMusicPage';
-// import MusicVenuePage from './pages/MusicVenuePage';
+import MusicVenuePage from './pages/MusicVenuePage';
 // import ReviewPage from './pages/ReviewPage';
 // import ErrorPage from './pages/ErrorPage';
 
@@ -18,6 +18,9 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <ExplorePage />
+      }, {
+        path: '/:venueId',
+        element: <MusicVenuePage />
       }/*, {
         path: '/live-music',
         element: <LiveMusicPage />

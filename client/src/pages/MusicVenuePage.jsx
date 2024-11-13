@@ -1,28 +1,29 @@
 
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_VENUES } from '../graphql/queries';
-import { ADD_REVIEW } from '../graphql/queries';
+import { QUERY_ALL_VENUES } from '../graphql/queries';
+// import { ADD_REVIEW } from '../graphql/queries';
+import { useParams } from 'react-router-dom';
 
-function MusicVenuePage({ match }) {
-  // const { venueId } = match.params;
-  const { loading, error, data } = useQuery(GET_VENUES);
-  const [addReview] = useMutation(ADD_REVIEW);
+function MusicVenuePage() {
+  let { venueId } = useParams();
+  const { loading, error, data } = useQuery(QUERY_ALL_VENUES);
+  // const [addReview] = useMutation(ADD_REVIEW);
   const [reviewText, setReviewText] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await addReview({
-        variables: {
-          venueId,
-          reviewText,
-        },
-      });
-      setReviewText('');
-    } catch (error) {
-      console.error('Error posting review', error);
-    }
+    // try {
+    //   await addReview({
+    //     variables: {
+    //       venueId,
+    //       reviewText,
+    //     },
+    //   });
+    //   setReviewText('');
+    // } catch (error) {
+    //   console.error('Error posting review', error);
+    // }
   };
 
   if (loading) return <p>Loading...</p>;
