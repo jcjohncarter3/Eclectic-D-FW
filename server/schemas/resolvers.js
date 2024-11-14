@@ -1,20 +1,37 @@
-const { User, Venue } = require("../models");
+const { User, Venue, Review } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     user: async (_, { id }) => {
-      return User.findById(id);
+      return await User.findById(id);
     },
     venues: async () => Venue.find(),
     liveMusic: async () => [],
+    review: async (_, { id }) => {
+      return await Review.findById(id)
+        .populate("user")
+        .populate("venue")
+        .exec();
+    },
+    reviews: async () => {
+      return await Review.find().populate("user").populate("venue");
+    },
+    reviewsByVenue: async (_, { venueId }) => {
+      return await Review.find({ venue: venueId })
+        .populate("user")
+        .populate("venue")
+        .exec();
+    },
   },
   Mutation: {
-    //   addUser: async (_, { username, email, password }) => {
-    //     const user = await User.create({ username, email, password });
-    //     const token = signToken(user);
-    //     return { token, user };
-    //   },
+    // The mutation to sign on a user for a new account
+    addUser: async (_, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      // const token = signToken(user);
+      // return { token, user };
+      return user;
+    },
     //   login: async (_, { email, password }) => {
     //     const user = await User.findOne({ email });
     //     if (!user) throw new Error("User not found");
@@ -25,6 +42,14 @@ const resolvers = {
     //   },
     addVenue: async (_, { name, location, description }) => {
       return await Venue.create({ name, location, description });
+    },
+    addReview: async (_, { text, rating, userId, venueId }) => {
+      return await Review.create({
+        text,
+        rating,
+        user: userId,
+        venue: venueId,
+      });
     },
   },
 };

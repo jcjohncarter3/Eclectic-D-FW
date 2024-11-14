@@ -12,9 +12,9 @@ const typeDefs = gql`
   type Review {
     _id: ID!
     text: String!
-    username: String!
-    createdAt: String!
     rating: Int!
+    venue: Venue
+    user: User
   }
   type LiveMusic {
     _id: ID!
@@ -36,10 +36,15 @@ const typeDefs = gql`
     user(id: ID!): User
     venues: [Venue]
     liveMusic: [LiveMusic]
+    review(id: ID!): Review
+    reviews: [Review]
+    reviewsByVenue(venueId: ID!): [Review]
   }
 
   type Mutation {
     addVenue(name: String, location: String, description: String): Venue
+    addUser(username: String!, email: String!, password: String!): User
+    addReview(text: String!, userId: ID, rating: Int!, venueId: ID): Review
   }
 `;
 

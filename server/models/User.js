@@ -27,15 +27,13 @@ const userSchema = new Schema(
     savedVenues: [
       {
         type: Schema.Types.ObjectId,
-        ref: "venueSchema",
-        required: true,
+        ref: "Venue",
       },
     ],
     reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: "reviewSchema",
-        required: true,
+        ref: "Review",
       },
     ],
   },
