@@ -1,5 +1,4 @@
-
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Venue {
@@ -13,25 +12,39 @@ const typeDefs = gql`
   type Review {
     _id: ID!
     text: String!
-    user: String!
-    createdAt: String!
+    rating: Int!
+    venue: Venue
+    user: User
   }
-
-  type Query {
-    venues: [Venue]
-    liveMusic: [LiveMusic]
-  }
-
-  type Mutation {
-    addReview(venueId: ID!, reviewText: String!): Review
-  }
-
   type LiveMusic {
     _id: ID!
     venueId: ID!
     artist: String!
     date: String!
     time: String!
+  }
+
+  type User {
+    _id: ID!
+    username: String!
+    email: String!
+    savedVenues: [Venue]
+    reviews: [Review]
+  }
+
+  type Query {
+    user(id: ID!): User
+    venues: [Venue]
+    liveMusic: [LiveMusic]
+    review(id: ID!): Review
+    reviews: [Review]
+    reviewsByVenue(venueId: ID!): [Review]
+  }
+
+  type Mutation {
+    addVenue(name: String, location: String, description: String): Venue
+    addUser(username: String!, email: String!, password: String!): User
+    addReview(text: String!, userId: ID, rating: Int!, venueId: ID): Review
   }
 `;
 

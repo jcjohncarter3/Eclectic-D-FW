@@ -1,37 +1,60 @@
-const { User, Venue } = require('../models');
-const { signToken } = require('../utils/auth');
+const { User, Venue, Review } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    users: async () => User.find(),
+    user: async (_, { id }) => {
+      return await User.findById(id);
+    },
     venues: async () => Venue.find(),
+    liveMusic: async () => [],
+    review: async (_, { id }) => {
+      return await Review.findById(id)
+        .populate("user")
+        .populate("venue")
+        .exec();
+    },
+    reviews: async () => {
+      return await Review.find().populate("user").populate("venue");
+    },
+    reviewsByVenue: async (_, { venueId }) => {
+      return await Review.find({ venue: venueId })
+        .populate("user")
+        .populate("venue")
+        .exec();
+    },
   },
   Mutation: {
+    // The mutation to sign on a user for a new account
     addUser: async (_, { username, email, password }) => {
       const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
+      // const token = signToken(user);
+      // return { token, user };
+      return user;
     },
-    login: async (_, { email, password }) => {
-      const user = await User.findOne({ email });
-      if (!user) throw new Error('User not found');
-      const isValid = await user.isCorrectPassword(password);
-      if (!isValid) throw new Error('Invalid credentials');
-      const token = signToken(user);
-      return { token, user };
+    //   login: async (_, { email, password }) => {
+    //     const user = await User.findOne({ email });
+    //     if (!user) throw new Error("User not found");
+    //     const isValid = await user.isCorrectPassword(password);
+    //     if (!isValid) throw new Error("Invalid credentials");
+    //     const token = signToken(user);
+    //     return { token, user };
+    //   },
+    addVenue: async (_, { name, location, description }) => {
+      return await Venue.create({ name, location, description });
     },
-    addVenue: async (_, { name, location, description, liveMusic }) => {
-      return Venue.create({ name, location, description, liveMusic });
+    addReview: async (_, { text, rating, userId, venueId }) => {
+      return await Review.create({
+        text,
+        rating,
+        user: userId,
+        venue: venueId,
+      });
     },
   },
 };
 
 module.exports = resolvers;
-
-
-
-
-
 
 // const Venue = require('../models/Venue');
 // const LiveMusic = require('../models/LiveMusic');
@@ -64,4 +87,3 @@ module.exports = resolvers;
 //       return newReview;
 //     },
 //   },
-
