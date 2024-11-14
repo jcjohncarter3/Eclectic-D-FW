@@ -45,6 +45,7 @@ const typeDefs = gql`
     addVenue(name: String, location: String, description: String): Venue
     addUser(username: String!, email: String!, password: String!): User
     addReview(text: String!, userId: ID, rating: Int!, venueId: ID): Review
+    login(email: String!, password: String!): User
   }
 `;
 

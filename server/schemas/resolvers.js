@@ -32,14 +32,15 @@ const resolvers = {
       // return { token, user };
       return user;
     },
-    //   login: async (_, { email, password }) => {
-    //     const user = await User.findOne({ email });
-    //     if (!user) throw new Error("User not found");
-    //     const isValid = await user.isCorrectPassword(password);
-    //     if (!isValid) throw new Error("Invalid credentials");
-    //     const token = signToken(user);
-    //     return { token, user };
-    //   },
+    login: async (_, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) throw new Error("User not found");
+      const isValid = await user.isCorrectPassword(password);
+      if (!isValid) throw new Error("Invalid credentials");
+      // const token = signToken(user);
+      // return { token, user };
+      return user;
+    },
     addVenue: async (_, { name, location, description }) => {
       return await Venue.create({ name, location, description });
     },
