@@ -60,6 +60,15 @@ const header = () => {
 </div>
 
   );
-}
+};
+
+// const body = () => {
+//   return (
+//     <div>
+//       <img src="/client/public/gilligans.jpg" alt="j gilligans"/>
+//     </div>
+//   )
+// };
 
 export default header;
+// export default body; 

@@ -12,20 +12,20 @@ function ExplorePage() {
 
   return (
     <div>
-      <h1>Explore Music Venues</h1>
-      <ul>
-        {data.venues.map((venue) => (
-          <li key={venue._id}>
-            <Link to={venue._id}>
-              <h3>{venue.name}</h3>
-              <p>{venue.location}</p>
-              <p>{venue.description}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    <h1>Explore Music Venues</h1>
+    <img src="./gilligans.jpg" alt="j gilligans" /> {/* Image from the public folder */}
+    <ul>
+      {data.venues.map((venue) => (
+        <li key={venue._id}>
+          <Link to={venue._id}>
+            <h3>{venue.name}</h3>
+            <p>{venue.location}</p>
+            <p>{venue.description}</p>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 }
-
 export default ExplorePage;
