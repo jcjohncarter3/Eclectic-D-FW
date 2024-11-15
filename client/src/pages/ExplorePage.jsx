@@ -12,20 +12,43 @@ function ExplorePage() {
 
   return (
     <div>
-    <h1>Explore Music Venues</h1>
-    <img src="./gilligans.jpg" alt="j gilligans" /> {/* Image from the public folder */}
-    <ul>
-      {data.venues.map((venue) => (
-        <li key={venue._id}>
-          <Link to={venue._id}>
-            <h3>{venue.name}</h3>
-            <p>{venue.location}</p>
-            <p>{venue.description}</p>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+      <div className="container-xxl py-.5">
+        {/* Centered Title */}
+        <div className="text-center mb-5">
+          <h1>Explore Music Venues</h1>
+        </div>
+
+        <div className="row">
+          {/* Left Half: Image */}
+          <div className="col-md-6">
+            <img
+              className="img-fluid w-100 h-100"
+              src="./gilligans.jpg"
+              alt="Gilligans"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+
+          {/* Right Half: Text */}
+          <div className="col-md-6 d-flex justify-content-center align-items-center">
+            <div>
+              <ul>
+                {data.venues.map((venue) => (
+                  <li key={venue._id} className="mb-4">
+                    <Link to={venue._id} style={{ textDecoration: "none", color: "inherit" }}>
+                      <h3>{venue.name}</h3>
+                      <p>{venue.location}</p>
+                      <p>{venue.description}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
 export default ExplorePage;
