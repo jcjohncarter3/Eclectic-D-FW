@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <nav>
       <ul>
-        <li>
+        {/* <li>
           <NavLink to="/" activeClassName="active">
             Explore
           </NavLink>
@@ -24,7 +24,7 @@ function NavBar() {
           <NavLink to="/auth" activeClassName="active">
             Login/Sign-Up
           </NavLink>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
