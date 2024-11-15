@@ -1,13 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const ADD_REVIEW = gql`
-  mutation addReview($text: String!, $rating: Int!, $userId: ID, $venueId: ID) {
-    addReview(
-      text: $text
-      rating: $rating
-      userId: $userId
-      venueId: $venueId
-    ) {
+  mutation addReview($text: String!, $rating: Int!, $venueId: ID) {
+    addReview(text: $text, rating: $rating, venueId: $venueId) {
       _id
       text
       rating
@@ -23,16 +18,19 @@ export const ADD_REVIEW = gql`
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
-      _id
-      email
-      username
-      reviews {
+      token
+      user {
         _id
-        text
-      }
-      savedVenues {
-        _id
-        name
+        email
+        username
+        reviews {
+          _id
+          text
+        }
+        savedVenues {
+          _id
+          name
+        }
       }
     }
   }
@@ -41,8 +39,12 @@ export const ADD_USER = gql`
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      _id
-      email
+      token
+      user {
+        _id
+        email
+        username
+      }
     }
   }
 `;

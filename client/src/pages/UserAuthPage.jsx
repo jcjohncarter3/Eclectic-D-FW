@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ADD_USER, LOGIN_USER } from "../graphql/mutations";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import Auth from "../utils/auth";
 function UserAuthPage() {
   const [usernameField, setUsernameField] = useState("");
   const [emailField, setEmailField] = useState("");
@@ -10,6 +11,8 @@ function UserAuthPage() {
   const [login, { error: loginError }] = useMutation(LOGIN_USER);
   const [emailFieldLogin, setEmailFieldLogin] = useState("");
   const [passwordFieldLogin, setPasswordFieldLogin] = useState("");
+  const [errorMessageSignOn, seterrorMessageSignOn] = useState("");
+  const [errorMessageLogin, seterrorMessageLogin] = useState("");
   const navigate = useNavigate();
 
   const handleSubmitLogin = async (e) => {
@@ -17,20 +20,23 @@ function UserAuthPage() {
     console.log("emailFieldLogin", emailFieldLogin);
     console.log("passwordFieldLogin", passwordFieldLogin);
     try {
-      const newUser = await login({
+      const { data } = await login({
         variables: {
           email: emailFieldLogin,
           password: passwordFieldLogin,
         },
       });
-      console.log("new user", newUser);
+      // console.log("new user", newUser);
       //   // setReviewList([...reviewList, newReview]);
       //   setReviewList((oldArray) => [newReview.data.addReview, ...oldArray]);
       //   setReviewText("");
       //   setReviewRating(1);
+      const { token } = data.login;
+      Auth.login(token);
       navigate("/");
     } catch (error) {
-      console.error("Error posting review", error);
+      // console.error("Error posting review", error);
+      seterrorMessageLogin("Invalid Email or Password.");
     }
   };
 
@@ -40,21 +46,24 @@ function UserAuthPage() {
     console.log("emailField", emailField);
     console.log("passwordField", passwordField);
     try {
-      const newUser = await addUser({
+      const { data } = await addUser({
         variables: {
           username: usernameField,
           email: emailField,
           password: passwordField,
         },
       });
-      console.log("new user", newUser);
+      console.log("new user", data);
       //   // setReviewList([...reviewList, newReview]);
       //   setReviewList((oldArray) => [newReview.data.addReview, ...oldArray]);
       //   setReviewText("");
       //   setReviewRating(1);
+      const { token } = data.addUser;
+      Auth.login(token);
       navigate("/");
     } catch (error) {
-      console.error("Error posting review", error);
+      // console.error("Error posting review", error);
+      seterrorMessageSignOn("Fill out the form property to sign up.");
     }
   };
 
@@ -65,6 +74,23 @@ function UserAuthPage() {
         <div className="col-md-6">
           <h2>Login</h2>
 
+          {Boolean(errorMessageLogin) && (
+            <div
+              className="alert alert-warning alert-dismissible fade show"
+              role="alert"
+            >
+              {errorMessageLogin}
+              <button
+                type="button"
+                className="close"
+                data-dismiss="alert"
+                aria-label="Close"
+                onClick={() => seterrorMessageLogin("")}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          )}
           <form onSubmit={handleSubmitLogin} className="form login-form">
             <div className="form-group">
               <label htmlFor="email-login">email:</label>
@@ -95,6 +121,24 @@ function UserAuthPage() {
         </div>
         <div className="col-md-6">
           <h2>Signup</h2>
+
+          {Boolean(errorMessageSignOn) && (
+            <div
+              className="alert alert-warning alert-dismissible fade show"
+              role="alert"
+            >
+              {errorMessageSignOn}
+              <button
+                type="button"
+                className="close"
+                data-dismiss="alert"
+                aria-label="Close"
+                onClick={() => seterrorMessageSignOn("")}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          )}
 
           <form onSubmit={handleSubmitSignOn} className="form signup-form">
             <div className="form-group">
@@ -135,8 +179,6 @@ function UserAuthPage() {
           </form>
         </div>
       </div>
-
-      {/* <script src="./js/login.js"></script> */}
     </div>
   );
 }
