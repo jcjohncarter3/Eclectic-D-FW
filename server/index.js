@@ -3,7 +3,7 @@ const express = require("express");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 const path = require("path");
-const { authMiddleware, auth2 } = require("./utils/auth");
+const { authMiddleware } = require("./utils/auth");
 const cors = require("cors");
 
 const { typeDefs, resolvers } = require("./schemas");
@@ -26,7 +26,7 @@ const startApolloServer = async () => {
   app.use(
     "/graphql",
     expressMiddleware(server, {
-      context: auth2,
+      context: authMiddleware,
     }),
     cors({
       origin: "*",

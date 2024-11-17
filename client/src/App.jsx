@@ -8,8 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import Header from "./components/Header";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -21,7 +20,6 @@ const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
-  console.log("token: ", token);
   return {
     headers: {
       ...headers,

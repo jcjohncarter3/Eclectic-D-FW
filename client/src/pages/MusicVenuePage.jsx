@@ -10,7 +10,7 @@ import Auth from "../utils/auth";
 
 function MusicVenuePage() {
   let { venueId } = useParams();
-  console.log("venueId: ", venueId);
+
   const {
     loading: loadingVenues,
     error: errorVenues,
@@ -35,13 +35,12 @@ function MusicVenuePage() {
     setReviewList(reviews);
   }, [dataReviews]);
 
-  // const currentUserProfile = Auth.loggedIn() ? Auth.getProfile()?.data : null;
-  // console.log("xprofile: ", currentUserProfile?.username);
+  const currentUserProfile = Auth.loggedIn() ? Auth.getProfile()?.data : null;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("reviewText", reviewText);
-    console.log("reviewRating", reviewRating);
-    // console.log("currentUserProfile: ", currentUserProfile);
+
+    if (!reviewText) return;
     try {
       const newReview = await addReview({
         variables: {
@@ -51,8 +50,7 @@ function MusicVenuePage() {
           // userId: currentUserProfile?._id, //"6734fd0a49dd465ec3288076", // replace with JWT token later
         },
       });
-      console.log("new review", newReview);
-      // setReviewList([...reviewList, newReview]);
+
       setReviewList((oldArray) => [newReview.data.addReview, ...oldArray]);
       setReviewText("");
       setReviewRating(1);
@@ -64,7 +62,7 @@ function MusicVenuePage() {
   if (loadingVenues || loadingReviews) return <p>Loading...</p>;
   if (errorVenues) return <p>Error: {errorVenues.message}</p>;
   if (errorReviews) return <p>Error: {errorReviews.message}</p>;
-  console.log("dataReviews", dataReviews);
+
   const venue = dataVenues.venues.find((venue) => venue._id === venueId);
 
   return (
@@ -92,7 +90,9 @@ function MusicVenuePage() {
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              <button type="submit">Submit Review</button>
+              <button type="submit" disabled={!reviewText}>
+                Submit Review
+              </button>
             </form>
           </div>
         ) : (
@@ -106,7 +106,12 @@ function MusicVenuePage() {
                 <div key={review._id} style={{ border: "1px solid black" }}>
                   <p>Rating: {review.rating}/5</p>
                   <p> REview: {review.text}</p>
-                  <p>By: {review.user ? `${review.user?.username}` : null}</p>
+                  <p>
+                    By:{" "}
+                    {review.user && review.user?.username
+                      ? `${review.user?.username}`
+                      : currentUserProfile?.username}
+                  </p>
                 </div>
               );
             })}

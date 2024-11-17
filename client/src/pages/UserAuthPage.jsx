@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ADD_USER, LOGIN_USER } from "../graphql/mutations";
 import { useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 function UserAuthPage() {
   const [usernameField, setUsernameField] = useState("");
@@ -13,12 +12,10 @@ function UserAuthPage() {
   const [passwordFieldLogin, setPasswordFieldLogin] = useState("");
   const [errorMessageSignOn, seterrorMessageSignOn] = useState("");
   const [errorMessageLogin, seterrorMessageLogin] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
-    console.log("emailFieldLogin", emailFieldLogin);
-    console.log("passwordFieldLogin", passwordFieldLogin);
+
     try {
       const { data } = await login({
         variables: {
@@ -26,14 +23,9 @@ function UserAuthPage() {
           password: passwordFieldLogin,
         },
       });
-      // console.log("new user", newUser);
-      //   // setReviewList([...reviewList, newReview]);
-      //   setReviewList((oldArray) => [newReview.data.addReview, ...oldArray]);
-      //   setReviewText("");
-      //   setReviewRating(1);
+
       const { token } = data.login;
       Auth.login(token);
-      navigate("/");
     } catch (error) {
       // console.error("Error posting review", error);
       seterrorMessageLogin("Invalid Email or Password.");
@@ -42,9 +34,7 @@ function UserAuthPage() {
 
   const handleSubmitSignOn = async (e) => {
     e.preventDefault();
-    console.log("usernameField", usernameField);
-    console.log("emailField", emailField);
-    console.log("passwordField", passwordField);
+
     try {
       const { data } = await addUser({
         variables: {
@@ -53,14 +43,8 @@ function UserAuthPage() {
           password: passwordField,
         },
       });
-      console.log("new user", data);
-      //   // setReviewList([...reviewList, newReview]);
-      //   setReviewList((oldArray) => [newReview.data.addReview, ...oldArray]);
-      //   setReviewText("");
-      //   setReviewRating(1);
       const { token } = data.addUser;
       Auth.login(token);
-      navigate("/");
     } catch (error) {
       // console.error("Error posting review", error);
       seterrorMessageSignOn("Fill out the form property to sign up.");
