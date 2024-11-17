@@ -28,27 +28,30 @@ const resolvers = {
     // The mutation to sign on a user for a new account
     addUser: async (_, { username, email, password }) => {
       const user = await User.create({ username, email, password });
-      // const token = signToken(user);
-      // return { token, user };
-      return user;
+      const token = signToken(user);
+      return { token, user };
+      // return user;
     },
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) throw new Error("User not found");
       const isValid = await user.isCorrectPassword(password);
       if (!isValid) throw new Error("Invalid credentials");
-      // const token = signToken(user);
-      // return { token, user };
-      return user;
+      const token = signToken(user);
+      return { token, user };
+      // return user;
     },
     addVenue: async (_, { name, location, description }) => {
       return await Venue.create({ name, location, description });
     },
-    addReview: async (_, { text, rating, userId, venueId }) => {
+    addReview: async (_, { text, rating, venueId }, context) => {
+      if (!context.hasToken || !context.data._id) {
+        throw new Error("Unauthenticated.");
+      }
       return await Review.create({
         text,
         rating,
-        user: userId,
+        user: context.data._id,
         venue: venueId,
       });
     },

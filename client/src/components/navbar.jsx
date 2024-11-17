@@ -1,11 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Auth from "../utils/auth";
 
 function NavBar() {
+  function logout() {
+    Auth.logout();
+  }
   return (
     <nav>
       <ul>
-        {/* <li>
+        <li>
           <NavLink to="/" activeClassName="active">
             Explore
           </NavLink>
@@ -20,11 +24,15 @@ function NavBar() {
             Music Venue
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/auth" activeClassName="active">
-            Login/Sign-Up
-          </NavLink>
-        </li> */}
+        {!Auth.loggedIn() ? (
+          <li>
+            <NavLink to="/auth" activeClassName="active">
+              Login/Sign-Up
+            </NavLink>
+          </li>
+        ) : (
+          <button onClick={logout}>Logout</button>
+        )}
       </ul>
     </nav>
   );
