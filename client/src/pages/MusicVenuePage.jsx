@@ -66,52 +66,68 @@ function MusicVenuePage() {
   const venue = dataVenues.venues.find((venue) => venue._id === venueId);
 
   return (
-    <div>
+    <div className="px-3 py-3">
       <h1>{venue.name}</h1>
-      <p>{venue.location}</p>
-      <p>{venue.description}</p>
+      <p>Location: {venue.location}</p>
+      {venue.description && <p>Description: {venue.description}</p>}
 
-      <div className="review-section">
+      <div className="review-section pt-3">
         {Auth.loggedIn() ? (
-          <div className="review-entry-form">
-            <h2>Post a Review</h2>
+          <div className="review-entry-form mb-4">
+            <p className="title">Post a Review</p>
             <form onSubmit={handleSubmit}>
-              <textarea
-                value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
-                placeholder="Write your review"
-                required
-              />
-              <label>Rating:</label>
-              <select onChange={(e) => setReviewRating(e.target.value)}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-              <button type="submit" disabled={!reviewText}>
+              <div className="form-group mb-2">
+                <textarea
+                  className="form-control"
+                  value={reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
+                  placeholder="Write your review"
+                  required
+                  rows="3"
+                ></textarea>
+              </div>
+              <div
+                className="form-group mb-2"
+                onChange={(e) => setReviewRating(e.target.value)}
+              >
+                <label>Rating:</label>
+                <select className="form-control">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={!reviewText}
+              >
                 Submit Review
               </button>
             </form>
           </div>
         ) : (
-          <p>Login to add review.</p>
+          <p className="prompt">Login to add review.</p>
         )}
         <div className="review-list">
           {reviewList.length > 0 &&
             reviewList &&
             reviewList.map((review) => {
               return (
-                <div key={review._id} style={{ border: "1px solid black" }}>
-                  <p>Rating: {review.rating}/5</p>
-                  <p> REview: {review.text}</p>
-                  <p>
-                    By:{" "}
-                    {review.user && review.user?.username
-                      ? `${review.user?.username}`
-                      : currentUserProfile?.username}
-                  </p>
+                <div key={review._id} className="card mb-2">
+                  <div className="card-body">
+                    <p>Rating: {review.rating}/5</p>
+                    <p className="main-text">Review: {review.text}</p>
+                    <p>
+                      By:{" "}
+                      {review.user && review.user?.username
+                        ? `${review.user?.username}`
+                        : currentUserProfile?.username}
+                    </p>
+                  </div>
                 </div>
               );
             })}

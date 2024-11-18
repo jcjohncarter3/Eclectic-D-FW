@@ -13,12 +13,29 @@
   color: #aaa;
 }
 
+.review-section .prompt {
+  font-size: 1.25rem;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 8px;
+  border-radius: 8px;
+  
+}
+.review-entry-form .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.review-list {
+  color: black;
+}
+.review-list .main-text {
+  font-size: 1.25rem;
+}
+
 @media screen and (min-width: 412px) {
   .navigation {
     flex-direction: row;
     align-items: center;
   }
-}
-@media screen and (min-width: 524px) {
-  
 }
