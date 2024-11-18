@@ -4,10 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.jsx";
 import ExplorePage from "./pages/ExplorePage";
-// import LiveMusicPage from './pages/LiveMusicPage';
+import LiveMusicPage from "./pages/LiveMusicPage";
 import MusicVenuePage from "./pages/MusicVenuePage";
-// import ReviewPage from './pages/ReviewPage';
-// import ErrorPage from './pages/ErrorPage';
+import AboutPage from "./pages/AboutPage";
+// import ErrorPage from "./pages/ErrorPage";
 import UserAuthPage from "./pages/UserAuthPage";
 const router = createBrowserRouter([
   {
@@ -26,16 +26,15 @@ const router = createBrowserRouter([
       {
         path: "/auth",
         element: <UserAuthPage />,
-      } /*, {
-        path: '/live-music',
-        element: <LiveMusicPage />
-      }, {
-        path: '/music-venue',
-        element: <MusicVenuePage />
-      }, {
-        path: '/reviews',
-        element: <ReviewPage />
-      }*/,
+      },
+      {
+        path: "/live-music",
+        element: <LiveMusicPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
+      },
     ],
   },
 ]);

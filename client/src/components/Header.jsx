@@ -6,8 +6,8 @@ const header = () => {
     <div>
       <div className="container-xxl position-relative p-0">
         <header className=" px-4 px-lg-5 py-3 py-lg-0">
-          <NavLink to="/" activeClassName="active">
-            <h1 className="m-0">Eclectic-DFW</h1>
+          <NavLink to="/">
+            <h1>Eclectic-DFW</h1>
           </NavLink>
           <NavBar></NavBar>
         </header>

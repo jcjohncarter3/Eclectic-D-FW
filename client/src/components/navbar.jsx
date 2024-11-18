@@ -8,26 +8,17 @@ function NavBar() {
   return (
     <nav className="navigation">
       <div>
-        <NavLink to="/" activeClassName="active">
-          Explore
-        </NavLink>
+        <NavLink to="/">Explore</NavLink>
       </div>
       <div>
-        <NavLink to="/live-music" activeClassName="active">
-          Live Music
-        </NavLink>
+        <NavLink to="/live-music">Live Music</NavLink>
       </div>
       <div>
-        <NavLink to="/music-venue" activeClassName="active">
-          Music Venue
-        </NavLink>
+        <NavLink to="/about">About</NavLink>
       </div>
-
       {!Auth.loggedIn() ? (
         <div>
-          <NavLink to="/auth" activeClassName="active">
-            Login/Sign-Up
-          </NavLink>
+          <NavLink to="/auth">Login/Sign-Up</NavLink>
         </div>
       ) : (
         <button className="btn btn-secondary" onClick={logout}>
