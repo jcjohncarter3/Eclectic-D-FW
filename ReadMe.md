@@ -73,7 +73,7 @@ Users can log in to their accounts, explore music venues, view live music events
 
 ## Deployment
 
-The application is deployed on Render. You can access it [here](insert link to deployed Render here)
+The application is deployed on Render. You can access it [here](https://eclectic-dfw-b0gy.onrender.com/)
 
 ## Contributing
 
