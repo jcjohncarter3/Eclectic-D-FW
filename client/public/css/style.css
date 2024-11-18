@@ -109,7 +109,7 @@ body {
 }
 
 .navbar .navbar-brand h1 {
-    color: #FFFFFF;
+    color: white;
 }
 
 .navbar .navbar-brand img {
@@ -221,13 +221,13 @@ body {
 /*** Hero Header ***/
 .hero-header {
     margin-bottom: 6rem;
-    padding: 6rem 0 4rem 0; /* Example reduced values */
+    padding: 2rem 0 4rem 0; /* Example reduced values */
     background: url(../img/shape-bottom.png) center bottom no-repeat;
 }
 
 .page-header {
     margin-bottom: 2rem;
-    padding: 12rem 0 6rem 0;
+    padding: 8rem 0 4rem 0;
 }
 
 @media (max-width: 991.98px) {
