@@ -30,7 +30,9 @@ function NavBar() {
           </NavLink>
         </div>
       ) : (
-        <button onClick={logout}>Logout</button>
+        <button className="btn btn-secondary" onClick={logout}>
+          Logout
+        </button>
       )}
     </nav>
   );
