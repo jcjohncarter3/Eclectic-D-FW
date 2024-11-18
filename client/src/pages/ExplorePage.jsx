@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_ALL_VENUES } from '../graphql/queries';
+import React from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_VENUES } from "../graphql/queries";
 import { Link } from "react-router-dom";
 
 function ExplorePage() {
@@ -20,9 +19,9 @@ function ExplorePage() {
 
         <div className="row">
           {/* Left Half: Image */}
-          <div className="col-md-6">
+          <div className="col-md-8 mb-4">
             <img
-              className="img-fluid w-100 h-100"
+              className="img-fluid w-100"
               src="./gilligans.jpg"
               alt="Gilligans"
               style={{ objectFit: "cover" }}
@@ -30,19 +29,22 @@ function ExplorePage() {
           </div>
 
           {/* Right Half: Text */}
-          <div className="col-md-6 d-flex justify-content-center align-items-center">
+          <div className="col-md-4 justify-content-center align-items-center">
             <div>
-              <ul>
-                {data.venues.map((venue) => (
-                  <li key={venue._id} className="mb-4">
-                    <Link to={venue._id} style={{ textDecoration: "none", color: "inherit" }}>
-                      <h3>{venue.name}</h3>
-                      <p>{venue.location}</p>
-                      <p>{venue.description}</p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {data.venues.map((venue) => (
+                <Link to={venue._id} key={venue._id} className="mb-4">
+                  <div className="card mb-4">
+                    <div className="card-header">Venue</div>
+                    <div className="card-body">
+                      <h5 className="card-title" style={{ color: "#00B98E" }}>
+                        {venue.name}
+                      </h5>
+                      <p className="card-text">Located at {venue.location}</p>
+                      <button className="btn btn-primary">See details</button>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
