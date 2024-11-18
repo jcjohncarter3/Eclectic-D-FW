@@ -58,11 +58,8 @@ function UserAuthPage() {
           <h2>Login</h2>
 
           {Boolean(errorMessageLogin) && (
-            <div
-              className="alert alert-warning alert-dismissible fade show"
-              role="alert"
-            >
-              {errorMessageLogin}
+            <div className="alert alert-danger fade show" role="alert">
+              <span>{errorMessageLogin}</span>
               <button
                 type="button"
                 className="close"
@@ -107,10 +104,7 @@ function UserAuthPage() {
           <h2>Signup</h2>
 
           {Boolean(errorMessageSignOn) && (
-            <div
-              className="alert alert-warning alert-dismissible fade show"
-              role="alert"
-            >
+            <div className="alert alert-danger fade show" role="alert">
               {errorMessageSignOn}
               <button
                 type="button"

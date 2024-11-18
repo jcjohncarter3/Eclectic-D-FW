@@ -32,6 +32,15 @@
 .review-list .main-text {
   font-size: 1.25rem;
 }
+.alert {
+  display: flex;
+}
+.alert .close {
+  margin-left: auto;
+  color: inherit;
+  border: 0 none;
+  background-color: transparent;
+}
 
 @media screen and (min-width: 412px) {
   .navigation {
