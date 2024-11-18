@@ -52,18 +52,14 @@ function UserAuthPage() {
   };
 
   return (
-    <div>
-      <h1></h1>
+    <div className="container">
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 mb-4">
           <h2>Login</h2>
 
           {Boolean(errorMessageLogin) && (
-            <div
-              className="alert alert-warning alert-dismissible fade show"
-              role="alert"
-            >
-              {errorMessageLogin}
+            <div className="alert alert-danger fade show" role="alert">
+              <span>{errorMessageLogin}</span>
               <button
                 type="button"
                 className="close"
@@ -75,42 +71,40 @@ function UserAuthPage() {
               </button>
             </div>
           )}
-          <form onSubmit={handleSubmitLogin} className="form login-form">
-            <div className="form-group">
-              <label htmlFor="email-login">email:</label>
+
+          <form onSubmit={handleSubmitLogin}>
+            <div className="form-group mb-2">
+              <label>Email address</label>
               <input
-                className="form-input"
+                type="email"
+                className="form-control"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
                 value={emailFieldLogin}
                 onChange={(e) => setEmailFieldLogin(e.target.value)}
-                type="text"
-                id="email-login"
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="password-login">password:</label>
+            <div className="form-group mb-2">
+              <label>Password</label>
               <input
-                className="form-input"
+                type="password"
+                className="form-control"
+                placeholder="Password"
                 value={passwordFieldLogin}
                 onChange={(e) => setPasswordFieldLogin(e.target.value)}
-                type="password"
-                id="password-login"
               />
             </div>
-            <div className="form-group">
-              <button className="btn btn-primary" type="submit">
-                login
-              </button>
-            </div>
+
+            <button type="submit" className="btn btn-primary">
+              Login
+            </button>
           </form>
         </div>
         <div className="col-md-6">
           <h2>Signup</h2>
 
           {Boolean(errorMessageSignOn) && (
-            <div
-              className="alert alert-warning alert-dismissible fade show"
-              role="alert"
-            >
+            <div className="alert alert-danger fade show" role="alert">
               {errorMessageSignOn}
               <button
                 type="button"
@@ -124,40 +118,40 @@ function UserAuthPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmitSignOn} className="form signup-form">
+          <form onSubmit={handleSubmitSignOn}>
             <div className="form-group">
               <label htmlFor="name-signup">username:</label>
               <input
-                className="form-input"
+                className="form-control"
                 value={usernameField}
                 onChange={(e) => setUsernameField(e.target.value)}
                 type="text"
                 id="name-signup"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group mb-2">
               <label htmlFor="email-signup">email:</label>
               <input
-                className="form-input"
+                className="form-control"
                 value={emailField}
                 onChange={(e) => setEmailField(e.target.value)}
                 type="email"
                 id="email-signup"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group mb-2">
               <label htmlFor="password-signup">password:</label>
               <input
-                className="form-input"
+                className="form-control"
                 value={passwordField}
                 onChange={(e) => setPasswordField(e.target.value)}
                 type="password"
                 id="password-signup"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group mb-2">
               <button className="btn btn-primary" type="submit">
-                signup
+                Signup
               </button>
             </div>
           </form>

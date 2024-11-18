@@ -45,7 +45,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    addVenue(name: String, location: String, description: String): Venue
+    addVenue(name: String!, location: String!, description: String): Venue
     addUser(username: String!, email: String!, password: String!): Auth
     addReview(text: String!, rating: Int!, venueId: ID): Review
     login(email: String!, password: String!): Auth

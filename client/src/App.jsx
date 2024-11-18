@@ -1,3 +1,4 @@
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import {
@@ -8,7 +9,6 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import Header from "./components/Header";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
